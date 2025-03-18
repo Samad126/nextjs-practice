@@ -1,16 +1,23 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function SearchInput() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
+  const isInit = useRef<boolean>(true);
+
   const [name, setName] = useState<string>(searchParams.get("name") || "");
 
   useEffect(() => {
+    if (isInit.current) {
+      isInit.current = false;
+      return;
+    }
+    
     const handler = setTimeout(() => {
       const params = new URLSearchParams(searchParams);
       params.set("name", name);

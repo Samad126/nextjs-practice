@@ -3,5 +3,5 @@ function page() {
     <div>page1</div>
   )
 }
-
+  
 export default page
