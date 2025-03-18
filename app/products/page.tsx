@@ -1,21 +1,20 @@
-import GridItem from "@/components/GridItem";
+import Products from "@/components/Products";
+import SearchAndCats from "@/components/SearchAndCats";
+import { Suspense } from "react";
 
 async function page({ searchParams }) {
-  const searchQuery = (await searchParams)?.name || "";
-
-  console.log("updated", searchQuery);
-
-  const response = await fetch("https://dummyjson.com/products", {
-    cache: "no-store",
-  });
-  const data = await response.json();
-
   return (
-    <div className="grid grid-cols-3 gap-10 max-w-[1200px] mx-auto">
-      {data.products.map((item: any) => (
-        <GridItem key={item.id} data={item} />
-      ))}
-    </div>
+    <>
+      <Suspense fallback={<div>Loading Categories...</div>}>
+        <SearchAndCats />
+      </Suspense>
+      <Suspense
+        key={JSON.stringify(await searchParams)}
+        fallback={<div>Loading Products...</div>}
+      >
+        <Products searchParams={searchParams} />
+      </Suspense>
+    </>
   );
 }
 

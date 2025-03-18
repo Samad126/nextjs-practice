@@ -6,7 +6,7 @@ async function Cats() {
   const data = await response.json();
   console.log(data);
 
-  return <div>Cats</div>;
+  return <div>test</div>;
 }
 
 export default Cats;
