@@ -4,7 +4,7 @@ async function Products({ searchParams }) {
   const params = await searchParams;
 
   const response = await fetch(
-    `https://dummyjson.com/products/search?q=${params.name}`,
+    `https://dummyjson.com/products/search?q=${params.name || ""}`,
     {
       cache: "no-store",
     }
