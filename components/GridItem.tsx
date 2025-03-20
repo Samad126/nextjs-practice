@@ -6,6 +6,7 @@ export default function GridItem({ data }: { data: any }) {
     <Link
       href={`/products/${data.id}`}
       className="border-black border block h-[400px]"
+      prefetch={false}
     >
       <Carusel images={data.images} />
       <div>

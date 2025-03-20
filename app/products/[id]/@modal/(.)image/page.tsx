@@ -13,7 +13,6 @@ function Page() {
   useEffect(() => {
     const fetchImage = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
         const response = await fetch(`https://dummyjson.com/products/${id}`);
         if (!response.ok) throw new Error("Failed to fetch image");
 
