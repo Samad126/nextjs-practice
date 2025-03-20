@@ -7,7 +7,7 @@ export default function GridItem({ data }: { data: any }) {
       href={`/products/${data.id}`}
       className="border-black border block h-[400px]"
     >
-      {/* <Carusel images={data.images} /> */}
+      <Carusel images={data.images} />
       <div>
         <p>{data.title}</p>
         <p>

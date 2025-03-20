@@ -9,7 +9,7 @@ async function page({ searchParams }) {
         <SearchAndCats />
       </Suspense>
       <Suspense
-        key={JSON.stringify(await searchParams)}
+        key={JSON.stringify((await searchParams).name)}
         fallback={<div>Loading Products...</div>}
       >
         <Products searchParams={searchParams} />

@@ -37,9 +37,9 @@ function SearchInput() {
 
   return (
     <input
-      type="text"
-      className="form-control"
-      placeholder="Name of the user"
+      type="search"
+      className="border border-gray-300 rounded-md p-2"
+      placeholder="Search..."
       id="name"
       name="name"
       value={name}

@@ -6,7 +6,15 @@ async function Cats() {
   const data = await response.json();
   console.log(data);
 
-  return <div>test</div>;
+  return (
+    <>
+      {data.map((item: any, index: number) => (
+        <div key={index} className="bg-gray-100 p-4 rounded-md">
+          {item.name}
+        </div>
+      ))}
+    </>
+  );
 }
 
 export default Cats;

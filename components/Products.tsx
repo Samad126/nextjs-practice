@@ -11,7 +11,7 @@ async function Products({ searchParams }) {
   );
 
   const data = await response.json();
-  
+
   if (!data.products || data.products.length === 0) {
     return <div>No products found.</div>;
   }
