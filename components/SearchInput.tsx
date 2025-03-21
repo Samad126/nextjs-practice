@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useTransition } from "react";
 
 function SearchInput() {
   const searchParams = useSearchParams();
@@ -11,6 +11,7 @@ function SearchInput() {
   const isInit = useRef<boolean>(true);
 
   const [name, setName] = useState<string>(searchParams.get("name") || "");
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     if (isInit.current) {
@@ -19,17 +20,19 @@ function SearchInput() {
     }
     
     const handler = setTimeout(() => {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(window.location.search);
       params.set("name", name);
       params.set("page", "1");
 
-      router.push(`${pathname}?${params.toString()}`);
-    }, 300);
+      if (window.location.search !== `?${params.toString()}`) {
+        startTransition(() => {
+          router.push(`${pathname}?${params.toString()}`);
+        });
+      }
+    }, 0);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [name, searchParams, pathname, router]);
+    return () => clearTimeout(handler);
+  }, [name, pathname, router]);
 
   const handleFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
